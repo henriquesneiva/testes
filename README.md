@@ -1,6 +1,6 @@
 ~~~JavaScript
 const XLSX = require('xlsx');
-const axios = require('axios');
+const fetch = require('node-fetch');
 
 // Função para formatar o CPF para 11 dígitos
 function formatarCPF(cpf) {
@@ -25,10 +25,15 @@ async function fazerRequisicaoComCPF(cpfCnpj) {
   };
 
   try {
-    const response = await axios.get(url, { headers });
-    return response.data;
+    const response = await fetch(url, { headers });
+    if (!response.ok) {
+      throw new Error(`Erro na requisição para o CPF/CNPJ ${cpfCnpj}: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error(`Erro na requisição para o CPF/CNPJ ${cpfCnpj}: ${error.message}`);
+    console.error(error.message);
     return null;
   }
 }
@@ -49,5 +54,6 @@ async function main() {
 }
 
 main();
+
 
 ~~~
