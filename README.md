@@ -1,6 +1,4 @@
 ~~~JavaScript
-
-~~~
 const XLSX = require('xlsx');
 
 // Função para ler o arquivo Excel e extrair os dados
@@ -21,3 +19,5 @@ function lerArquivoExcel(nomeArquivo) {
 const nomeArquivoExcel = 'caminho/para/o/arquivo.xlsx';
 const resultadoFiltrado = lerArquivoExcel(nomeArquivoExcel);
 console.log(resultadoFiltrado);
+
+~~~
