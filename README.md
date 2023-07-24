@@ -1,4 +1,6 @@
 ~~~JavaScript
+
+~~~
 const XLSX = require('xlsx');
 
 // Função para ler o arquivo Excel e extrair os dados
@@ -9,8 +11,8 @@ function lerArquivoExcel(nomeArquivo) {
   // Parseia a planilha para um objeto JSON
   const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
-  // Filtra apenas as colunas "cpfCnpj" e "NomeProduto"
-  const dadosFiltrados = jsonData.map(({ cpfCnpj, NomeProduto }) => ({ cpfCnpj, NomeProduto }));
+  // Filtra apenas as colunas "CPF (CGCCDN) / CNPJ" e "Nome do Produto (NPRODDEMP)"
+  const dadosFiltrados = jsonData.map(({ 'CPF (CGCCDN) / CNPJ': cpfCnpj, 'Nome do Produto (NPRODDEMP)': NomeProduto }) => ({ cpfCnpj, NomeProduto }));
 
   return dadosFiltrados;
 }
@@ -19,5 +21,3 @@ function lerArquivoExcel(nomeArquivo) {
 const nomeArquivoExcel = 'caminho/para/o/arquivo.xlsx';
 const resultadoFiltrado = lerArquivoExcel(nomeArquivoExcel);
 console.log(resultadoFiltrado);
-
-~~~
