@@ -1,3 +1,6 @@
+npm install isomorphic-fetch
+const fetch = require('isomorphic-fetch');
+
 ~~~JavaScript
 const XLSX = require('xlsx');
 const fetch = require('node-fetch');
