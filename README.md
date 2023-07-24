@@ -9,8 +9,14 @@ function lerArquivoExcel(nomeArquivo) {
   // Parseia a planilha para um objeto JSON
   const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
+  // Obtém o cabeçalho da planilha
+  const cabecalho = jsonData[0];
+
+  // Pula a primeira linha do cabeçalho (contém "Data da Baixa")
+  const dadosSemCabecalho = jsonData.slice(1);
+
   // Filtra apenas as colunas "CPF (CGCCDN) / CNPJ" e "Nome do Produto (NPRODDEMP)"
-  const dadosFiltrados = jsonData.map(({ 'CPF (CGCCDN) / CNPJ': cpfCnpj, 'Nome do Produto (NPRODDEMP)': NomeProduto }) => ({ cpfCnpj, NomeProduto }));
+  const dadosFiltrados = dadosSemCabecalho.map(({ 'CPF (CGCCDN) / CNPJ': cpfCnpj, 'Nome do Produto (NPRODDEMP)': NomeProduto }) => ({ cpfCnpj, NomeProduto }));
 
   return dadosFiltrados;
 }
